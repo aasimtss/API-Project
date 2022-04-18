@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+      <!-- <app-alert *ngIf="Error"></app-alert> -->
+      <h1 class="text-center" style="font-weight: bold">
+        {{ isLoginMode ? "SignUp" : "Login" }}
+      </h1>
+      <form [formGroup]="dataForm">
+        <div class="form-group mb-2">
+          <label for="email">E-Mail</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            name="email"
+            formControlName="email"
+            required
+            email
+          />
+        </div>
+        <div class="form-group mb-2">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            class="form-control"
+            formControlName="password"
+            name="password"
+            required
+            minlength="6"
+          />
+        </div>
+        <div>
+          <button
+            class="btn btn-primary"
+            [disabled]="dataForm.invalid"
+            (click)="addData()"
+          >
+            {{ isLoginMode ? "Sign Up" : "Login" }}
+          </button>
+          |
+
+          <button class="btn btn-primary" (click)="onSwitchMode()">
+            {{ isLoginMode ? "Click for Login" : "For new click Sign Up" }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

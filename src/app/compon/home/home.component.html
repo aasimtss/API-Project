@@ -1,0 +1,69 @@
+<app-search-bar></app-search-bar>
+<div class="filter" style="margin-top: 65px">
+  <mat-form-field>
+    <mat-label>Sort</mat-label>
+    <mat-select
+      panelClass="sort-select"
+      [(ngModel)]="sort"
+      (selectionChange)="searchGames(sort)"
+    >
+      <mat-option value="name">Name</mat-option>
+      <mat-option value="-Released">Released</mat-option>
+      <mat-option value="-added">added</mat-option>
+      <mat-option value="-created">Created</mat-option>
+      <mat-option value="-updated">Updated</mat-option>
+      <mat-option value="-rating">Rating</mat-option>
+      <mat-option value="metacritic">Metacritic</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div class="games">
+  <ng-container *ngFor="let game of games">
+    <div class="game" (click)="openGameDetails(game.id)">
+      <div class="game-thumb-container">
+        <img
+          *ngIf="game.background_image"
+          src="{{ game.background_image }}"
+          alt="thumbnail"
+          class="game-thumbnail"
+        />
+        <!-- <p *ngIf="!game.background_image">No image</p>s -->
+        <img
+          *ngIf="!game.background_image"
+          src="assets/platpform/No image.png"
+          alt=""
+          style="height: 174px; width: 279px"
+        />
+      </div>
+      <div class="game-description">
+        <p class="game-name">{{ game.name }}</p>
+        <div class="game-platforms">
+          <img
+            *ngFor="let gamePlatform of game.parent_platforms"
+            class="game-platform"
+            src="assets/platpform/{{ gamePlatform.platform.slug }}.png"
+            alt="{{ gamePlatform.platform.slug }}"
+          />
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  color=" #3f51b5"
+  type="square-jelly-box"
+  ><p style="color: white">Loading...</p></ngx-spinner
+>
+
+<!-- <ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="square-jelly-box"
+  [fullScreen]="true"
+  ><p style="color: white">Loading...</p></ngx-spinner
+> -->
+<!-- </ng-container>
+</div> -->
+<app-footer></app-footer>
